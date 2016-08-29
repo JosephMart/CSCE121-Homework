@@ -1,0 +1,61 @@
+// Homework 02
+// Written by Joseph Martinsen
+// CSCE 121-
+// Dr. John Moore
+
+using namespace std;
+#include <iostream>
+#include <string>
+#include <cmath>
+
+int main()
+{
+	float a,b,c, dr, x0, x1;
+	
+	// Gather info from user
+	cout << "Enter a, b, and c" << endl;
+	cout << "a: ";
+	cin >> a;
+	cout << "b: ";
+	cin >> b;
+	cout << "c: ";
+	cin >> c;
+
+	// Calculate the Discriminate
+	dr = pow(b, 2) - 4 * a*c;
+
+	// Determine what type of solution
+	// Positive = 2 real roots
+	// 0 = There is one real root
+	// Negative = There are two complex roots
+	if (dr == 0)
+	{
+		// One real root
+		x0 = (-b + sqrt(dr)) / (2 * a);		
+		cout << "x = " << x0;
+	}
+	else if (dr > 0)
+	{
+		// 2 real roots
+		x0 = (-b - sqrt(dr)) / (2 * a);
+		x1 = (-b + sqrt(dr)) / (2 * a);
+		cout << "x = " << x0 << endl;
+		cout << "x = " << x1;
+	}
+	else if (dr < 0)
+	{
+		// 2 complex roots
+		float i0;
+		x0 = -b / (2 * a);
+		i0 = sqrt(-dr);
+
+
+		cout << "x = " << x0 << " - " << i0 << "i" << endl;
+		cout << "x = " << x0 << " + " << i0 << "i";
+	}
+
+	
+	
+	system("PAUSE");
+	return 0;
+}
