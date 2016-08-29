@@ -1,4 +1,4 @@
 ﻿  Source.cpp
-c:\users\josep\dropbox\tamu\16.3\csce 121\hw\csce121-hw\hw01\hw01\source.cpp(27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\josep\dropbox\tamu\16.3\csce 121\hw\csce121-hw\hw01\hw01\source.cpp(31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   HW01.vcxproj -> C:\Users\josep\Dropbox\TAMU\16.3\CSCE 121\HW\CSCE121-HW\HW01\Debug\HW01.exe
   HW01.vcxproj -> C:\Users\josep\Dropbox\TAMU\16.3\CSCE 121\HW\CSCE121-HW\HW01\Debug\HW01.pdb (Partial PDB)

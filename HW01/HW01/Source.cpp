@@ -10,9 +10,11 @@ using namespace std;
 
 int main()
 {
+	// Initialize Variables
 	string firstName, lastName;
-	float birth, feet, inches, avgGrowth;
+	float birth, feet, inches, avgGrowth, userHeight, age;
 
+	// Gather required information from the user
 	cout << "What is your first name: ";
 	cin >> firstName;
 
@@ -28,13 +30,17 @@ int main()
 	cout << "Inches: ";
 	cin >> inches;
 
-	avgGrowth = ((feet * 12) + inches)*2.54 / (2016 - birth);
-
-	cout << "Hello " << firstName << " " << lastName << ". You were " << 2016 - birth
-		<< " years old in 2016, and your height is " << ((feet * 12) + inches)*2.54 <<
+	// Calculate info
+	userHeight = ((feet * 12) + inches)*2.54;
+	age = 2016 - birth;
+	avgGrowth = userHeight / age;
+	
+	// Output info to user
+	cout << "Hello " << firstName << " " << lastName << ". You were " << age
+		<< " years old in 2016, and your height is " << userHeight <<
 		" cm. \nThat means you grew an average of " << avgGrowth << " cm per year. (Assuming that you were 51 cm at brith)";
 
-
+	// Need to get rid of
 	system("PAUSE");
 
 	return 0;
