@@ -13,12 +13,12 @@ int main()
 	float a,b,c, dr, x0, x1;
 	
 	// Gather info from user
-	cout << "Enter a, b, and c" << endl;
-	cout << "a: ";
+	cout << "Enter a, b, and c on a single line seperated by a space" << endl;
+	
 	cin >> a;
-	cout << "b: ";
+	
 	cin >> b;
-	cout << "c: ";
+	
 	cin >> c;
 
 	// Calculate the Discriminate
@@ -40,7 +40,7 @@ int main()
 		x0 = (-b - sqrt(dr)) / (2 * a);
 		x1 = (-b + sqrt(dr)) / (2 * a);
 		cout << "x = " << x0 << endl;
-		cout << "x = " << x1;
+		cout << "x = " << x1 << endl;
 	}
 	else if (dr < 0)
 	{
@@ -51,11 +51,9 @@ int main()
 
 
 		cout << "x = " << x0 << " - " << i0 << "i" << endl;
-		cout << "x = " << x0 << " + " << i0 << "i";
+		cout << "x = " << x0 << " + " << i0 << "i" << endl;
 	}
 
-	
-	
 	system("PAUSE");
 	return 0;
 }
