@@ -11,27 +11,29 @@ using namespace std;
 int main()
 {
 	float a,b,c, dr, x0, x1;
-	
+
 	// Gather info from user
 	cout << "Enter a, b, and c on a single line seperated by a space" << endl;
-	
+
 	cin >> a;
-	
+
 	cin >> b;
-	
+
 	cin >> c;
 
 	// Calculate the Discriminate
 	dr = pow(b, 2) - 4 * a*c;
 
-	// Determine what type of solution
-	// Positive = 2 real roots
-	// 0 = There is one real root
-	// Negative = There are two complex roots
+	/*
+		Determine what type of solution
+		Positive = 2 real roots
+		0 = There is one real root
+		Negative = There are two complex roots
+	*/
 	if (dr == 0)
 	{
 		// One real root
-		x0 = (-b + sqrt(dr)) / (2 * a);		
+		x0 = (-b + sqrt(dr)) / (2 * a);
 		cout << "x = " << x0;
 	}
 	else if (dr > 0)
@@ -54,6 +56,5 @@ int main()
 		cout << "x = " << x0 << " + " << i0 << "i" << endl;
 	}
 
-	system("PAUSE");
 	return 0;
 }
