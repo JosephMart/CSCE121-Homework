@@ -18,7 +18,6 @@ int main() {
     cin >> codeLength;
     vector<int> codeVector;
 
-
     // if = 0, ask user for code, else, generate random code
     if(codeLength == 0) {
         // Get code from user
@@ -32,18 +31,19 @@ int main() {
 
         // Convert int into Array
         while (digit) {
-            //codeVector.push_back(digit % 10);
             codeVector.insert(codeVector.begin(),digit % 10);
             digit /= 10;
             ++codeLength;
         }
 
-        // Add extra zeros
+        // Add extra zeros if need be
         for( i = 1; i <= trueDigits-codeLength;++i) {
             codeVector.insert(codeVector.begin(),0);
         }
 
+        // For later use in guesses
         codeLength = trueDigits;
+
         // Output inputed number to guess
         cout << "Number to guess: ";
 
@@ -61,18 +61,17 @@ int main() {
                 }
             }
         }
-
+        // TEMP to test Bulls and Cows
         cout << "Number to guess: ";
         for(i = 0; i<=codeVector.size()-1;++i){
             cout << codeVector.at(i);
         }
     }
-
+    // Continue into guessing portion
     int guess;
     vector<int> guessVector;
     bool gameContinue = true;
 
-    // Time to guess
     while(gameContinue){
         int bulls = 0;
         int cows = 0;

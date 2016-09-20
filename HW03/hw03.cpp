@@ -39,7 +39,6 @@ int main() {
 
         // Add extra zeros
         for( i = 1; i <= trueDigits-numberDigits;++i) {
-
             codeVector.insert(codeVector.begin(),0);
         }
 
