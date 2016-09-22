@@ -1,4 +1,3 @@
-﻿  Source.cpp
-c:\users\josep\dropbox\tamu\16.3\csce 121\hw\csce121-hw\hw01\hw01\source.cpp(34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  HW01.vcxproj -> C:\Users\josep\Dropbox\TAMU\16.3\CSCE 121\HW\CSCE121-HW\HW01\Debug\HW01.exe
-  HW01.vcxproj -> C:\Users\josep\Dropbox\TAMU\16.3\CSCE 121\HW\CSCE121-HW\HW01\Debug\HW01.pdb (Partial PDB)
+﻿cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  Source.cpp
+c:\users\josep\google drive\16.3\csce 121\hw\csce121-hw\hw01\hw01\source.cpp : fatal error C1041: cannot open program database 'C:\Users\josep\Google Drive\16.3\CSCE 121\HW\CSCE121-HW\HW01\HW01\Debug\vc140.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
