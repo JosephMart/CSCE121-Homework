@@ -17,7 +17,7 @@ int main() {
     vector<int> codeVector;
     srand(time(0));
     // Ask user for how digits in code
-    cout << "Enter number of digits in code (3, 4 or 5): ";
+    cout << "Enter number of digits in code (3, 4, or 5): " << endl;
     cin >> codeLength;
     // Check if input is acceptable
     again = (codeLength == 0 || codeLength == 3 || codeLength == 4 ||
@@ -26,7 +26,7 @@ int main() {
     while (cin.fail() || again) {
       cin.clear();
       cin.ignore(numeric_limits<streamsize>::max(),'\n');
-      cout << "Enter number of digits in code (3, 4 or 5): ";
+      cout << "Enter number of digits in code (3, 4, or 5): " << endl;
       cin >> codeLength;
       again = (codeLength == 0 || codeLength == 3 || codeLength == 4 ||
         codeLength == 5) ? false:true;
@@ -36,9 +36,9 @@ int main() {
         int trueDigits;
         codeLength = 0;
         // Get code from user
-        cout << "Enter code: ";
+        cout << "Enter code:" << endl;
         cin >> digit;
-        cout << "Enter number of digits in code: ";
+        cout << "Enter number of digits in code:"  << endl;
         cin >> trueDigits;
 
         // Convert int into Array
@@ -55,7 +55,7 @@ int main() {
         codeLength = trueDigits;
 
         // Output inputed number to guess
-        cout << "Number to guess: ";
+        cout << "Number to guess:";
         for(i = 0; i<=codeVector.size()-1;++i){
             cout << codeVector.at(i);
         }
@@ -70,36 +70,58 @@ int main() {
                 }
             }
         }
+        /*
         // TEMP to test Bulls and Cows
         cout << "Number to guess: ";
         for(i = 0; i<=codeVector.size()-1;++i){
             cout << codeVector.at(i);
-        }
+        }*/
     }
     // Continue into guessing portion
     while(gameContinue){
         int bulls = 0;
         int cows = 0;
         int guessCount = 0;
+        bool badInput = true;
+        bool repeat = false;
         guessVector.clear();
-        cout << endl << "Enter guess: ";
-        cin >> guess;
+
         // Check if it is acceptable input
-        while (cin.fail()) {
+        while (cin.fail() || badInput) {
+          badInput = false;
+          repeat = false;
           cin.clear();
           cin.ignore(numeric_limits<streamsize>::max(),'\n');
-          cout << endl << "Enter guess: ";
+          cout << endl << "Enter guess:" << endl;
           cin >> guess;
-        }
-        // Convert guess into guess Vector
-        while (guess) {
-            guessVector.insert(guessVector.begin(),guess % 10);
-            guess /= 10;
-            ++guessCount;
-        }
-        // Check if guess was supposed to start with a 0
-        if(guessCount < codeVector.size()) {
-            guessVector.insert(guessVector.begin(),0);
+          // Convert guess into guess Vector
+          while (guess) {
+              guessVector.insert(guessVector.begin(),guess % 10);
+              guess /= 10;
+              ++guessCount;
+          }
+          // Add zero if needed
+          if (guessVector.size() < codeVector.size()) {
+              guessVector.insert(guessVector.begin(),0);
+          }
+
+          //check if no repeats
+          for( i = 0;i < guessVector.size();++i) {
+              for( j = 0; j < i; ++j) {
+                  if(guessVector.at(i) == guessVector.at(j) && i != j) {
+                      repeat = true;
+                  }
+              }
+          }
+          if (repeat || badInput || guessVector.size() < codeVector.size()) {
+            guessVector.clear();
+            std::cout << "Each number must be different.";
+            badInput = true;
+          } else if (guessVector.size() > codeVector.size()) {
+            std::cout << "You can only enter " << codeVector.size() << " digits.";
+            badInput = true;
+            guessVector.clear();
+          }
         }
         // Compare guessVector to codeVector
         for(i = 0;i < guessVector.size(); ++i) {
@@ -115,7 +137,11 @@ int main() {
         }
         cout << bulls << " bulls";
         if (bulls == codeVector.size()) {
-            cout << "  -  Correct!";
+            cout << " - ";
+            for ( i = 0; i < codeVector.size(); i++) {
+              cout << codeVector.at(i);
+            }
+            cout << "  is Correct!";
             gameContinue = false;
         } else {
             cout << endl;
