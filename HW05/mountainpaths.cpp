@@ -6,7 +6,7 @@
 using namespace std;
 
 // Declare functions
-vector<vector<int>> loadData(int& rows, int& columns);
+vector<vector<int>> loadData(int& rows, int& columns, string& fileName);
 int Extrema(int option, vector<vector<int>> v, int rows, int columns);
 vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max);
 
@@ -14,21 +14,24 @@ int main() {
   vector<std::vector<int>> data;
   int rows;
   int columns;
+  string fileName;
   // Load data
-  data = loadData(rows, columns);
+  data = loadData(rows, columns, fileName);
 
   // Find min and Max
   int Max = Extrema(1, data, rows, columns);
   int Min = Extrema(0, data, rows, columns);
   // TEST - Max and Min values
-  std::cout << "Max: " << Max << '\n';
-  std::cout << "Min: " << Min << '\n';
+  //std::cout << "Max: " << Max << '\n';
+  //std::cout << "Min: " << Min << '\n';
   // Color value = ((float)x-(float)Min)/((float)Max-(float)Min)
   vector<vector<int>> colors = RGB(data, rows, columns, Min, Max);
 
   ofstream outFS;
-  outFS.open("pic.ppm");
-	// Step 3: check if opened successfully
+  string ext = ".ppm";
+  fileName.append(ext);
+  outFS.open(fileName);
+	// Step 3: check if open ed successfully
   if (!outFS.is_open()) {
     std::cout << "File output stream did not open" << '\n';
   }
@@ -49,22 +52,22 @@ int main() {
   return 0;
 }
 
-vector<vector<int>> loadData(int& rows, int& columns) {
+vector<vector<int>> loadData(int& rows, int& columns, string& fileName) {
   ifstream inFS;
   vector<vector<int>> data;
   int temp;
   int i = 0; // row
   int j = 0; // column
-  string fileName;
+  //string fileName;
   // Get info from user
-  /*std::cout << "Number of rows: " << '\n';
-  std::cin >> rows;*/ rows = 480;
+  std::cout << "Number of rows: " << '\n';
+  std::cin >> rows;// rows = 480;
 
-  /*std::cout << "Number of Columns: " << '\n';
-  std::cin >> columns;*/ columns = 844;
+  std::cout << "Number of Columns: " << '\n';
+  std::cin >> columns; //columns = 844;
 
-  /*std::cout << "File Name: " << '\n';
-  std::cin >> fileName;*/ fileName = "map-input-844-480.dat";
+  std::cout << "File Name: " << '\n';
+  std::cin >> fileName;// fileName = "map-input-844-480.dat";
 
   // Open and load data
   inFS.open(fileName);

@@ -1,3 +1,0 @@
-Min: 14
-Max: 987
-Median 469
