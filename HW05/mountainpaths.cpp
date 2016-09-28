@@ -8,7 +8,7 @@ using namespace std;
 // Declare functions
 vector<vector<int>> loadData(int& rows, int& columns);
 int Extrema(int option, vector<vector<int>> v, int rows, int columns);
-vector<vector<float>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max);
+vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max);
 
 int main() {
   vector<std::vector<int>> data;
@@ -24,9 +24,27 @@ int main() {
   std::cout << "Max: " << Max << '\n';
   std::cout << "Min: " << Min << '\n';
   // Color value = ((float)x-(float)Min)/((float)Max-(float)Min)
-  vector<vector<float>> colors = RGB(data, rows, columns, Min, Max);
+  vector<vector<int>> colors = RGB(data, rows, columns, Min, Max);
 
+  ofstream outFS;
+  outFS.open("pic.ppm");
+	// Step 3: check if opened successfully
+  if (!outFS.is_open()) {
+    std::cout << "File output stream did not open" << '\n';
+  }
 
+  outFS << "P3" << endl;
+  outFS << columns << " " << rows << endl;
+  outFS << 255 << endl;
+
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < columns; ++j) {
+      for (int k = 0; k < 3; k++) {
+        outFS << colors.at(i).at(j) << " ";
+      }
+    }
+    outFS << endl;
+  }
 
   return 0;
 }
@@ -43,10 +61,10 @@ vector<vector<int>> loadData(int& rows, int& columns) {
   std::cin >> rows;*/ rows = 480;
 
   /*std::cout << "Number of Columns: " << '\n';
-  std::cin >> columns;*/ columns = 480;
+  std::cin >> columns;*/ columns = 844;
 
   /*std::cout << "File Name: " << '\n';
-  std::cin >> fileName;*/ fileName = "map-input-480-480.dat";
+  std::cin >> fileName;*/ fileName = "map-input-844-480.dat";
 
   // Open and load data
   inFS.open(fileName);
@@ -96,10 +114,10 @@ int Extrema(int option, vector<vector<int>> v, int rows, int columns) {
   return Extreme;
 }
 
-vector<vector<float>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max) {
-  vector<vector<float>> colors;
+vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max) {
+  vector<vector<int>> colors;
   for (int i = 0; i < rows; ++i) {
-    vector<float> row;
+    vector<int> row;
     for (int j = 0; j < columns; ++j) {
       row.push_back((((float)v.at(i).at(j) - (float)min)/((float)max-(float)min))*255.0);
     }
