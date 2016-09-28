@@ -8,6 +8,7 @@ using namespace std;
 // Declare functions
 vector<vector<int>> loadData(int& rows, int& columns);
 int Extrema(int option, vector<vector<int>> v, int rows, int columns);
+vector<vector<float>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max);
 
 int main() {
   vector<std::vector<int>> data;
@@ -19,9 +20,11 @@ int main() {
   // Find min and Max
   int Max = Extrema(1, data, rows, columns);
   int Min = Extrema(0, data, rows, columns);
-
+  // TEST - Max and Min values
   std::cout << "Max: " << Max << '\n';
   std::cout << "Min: " << Min << '\n';
+  // Color value = ((float)x-(float)Min)/((float)Max-(float)Min)
+  vector<vector<float>> colors = RGB(data, rows, columns, Min, Max);
 
 
 
@@ -36,14 +39,14 @@ vector<vector<int>> loadData(int& rows, int& columns) {
   int j = 0; // column
   string fileName;
   // Get info from user
-  std::cout << "Number of rows: " << '\n';
-  std::cin >> rows;
+  /*std::cout << "Number of rows: " << '\n';
+  std::cin >> rows;*/ rows = 480;
 
-  std::cout << "Number of Columns: " << '\n';
-  std::cin >> columns;
+  /*std::cout << "Number of Columns: " << '\n';
+  std::cin >> columns;*/ columns = 480;
 
-  std::cout << "File Name: " << '\n';
-  std::cin >> fileName;
+  /*std::cout << "File Name: " << '\n';
+  std::cin >> fileName;*/ fileName = "map-input-480-480.dat";
 
   // Open and load data
   inFS.open(fileName);
@@ -60,18 +63,18 @@ vector<vector<int>> loadData(int& rows, int& columns) {
    }
    data.push_back(row);
  }
- /* TESTING - Output data
- int w = 3;
- for (int i = 0; i < rows; ++i) {
+ /*TESTING - Output data
+ int w = 5;
+ for (int i = 0; i < 10; ++i) {
      cout << (i+1) << setw(w) << "|";
-   for (int j = 0; j < columns; ++j) {
+   for (int j = 0; j < 10; ++j) {
        cout << setw(w);
-       cout <<  data.at(i).at(j);
+       cout <<  data.at(i).at(j) << " ";
    }
    cout << endl;
  }
- cout << endl;
- */
+ cout << endl;*/
+
 
   // Step 5: close (Do nothing will automatically close when stream variable is destroyed.)
   //inFS.close(fileName);
@@ -91,4 +94,28 @@ int Extrema(int option, vector<vector<int>> v, int rows, int columns) {
     }
   }
   return Extreme;
+}
+
+vector<vector<float>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max) {
+  vector<vector<float>> colors;
+  for (int i = 0; i < rows; ++i) {
+    vector<float> row;
+    for (int j = 0; j < columns; ++j) {
+      row.push_back((((float)v.at(i).at(j) - (float)min)/((float)max-(float)min))*255.0);
+    }
+    colors.push_back(row);
+  }
+/* TEST - Output data
+  int w = 3;
+  for (int i = 0; i < 10; ++i) {
+      cout << (i+1) << setw(w) << "|";
+    for (int j = 0; j < 10; ++j) {
+        cout << setw(w);
+        cout <<  colors.at(i).at(j) << " ";
+    }
+    cout << endl;
+  }
+  cout << endl;
+  */
+  return colors;
 }
