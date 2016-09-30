@@ -8,46 +8,27 @@ using namespace std;
 // Declare functions
 vector<vector<int>> loadData(int& rows, int& columns, string& fileName);
 int Extrema(int option, vector<vector<int>> v, int rows, int columns);
-vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max);
+vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min,
+  int max);
+void outputData(vector<vector<int>> r, vector<vector<int>> g,
+  vector<vector<int>> b, int rows, int columns, string fileName);
 
 int main() {
-  vector<std::vector<int>> data;
+  vector<vector<int>> data;
+  vector<vector<int>> red;
+  vector<vector<int>> green;
+  vector<vector<int>> blue;
   int rows;
   int columns;
   string fileName;
-  // Load data
-  data = loadData(rows, columns, fileName);
 
-  // Find min and Max
+  data = loadData(rows, columns, fileName);
   int Max = Extrema(1, data, rows, columns);
   int Min = Extrema(0, data, rows, columns);
-  // TEST - Max and Min values
-  //std::cout << "Max: " << Max << '\n';
-  //std::cout << "Min: " << Min << '\n';
-  // Color value = ((float)x-(float)Min)/((float)Max-(float)Min)
-  vector<vector<int>> colors = RGB(data, rows, columns, Min, Max);
-
-  ofstream outFS;
-  string ext = ".ppm";
-  fileName.append(ext);
-  outFS.open(fileName);
-	// Step 3: check if open ed successfully
-  if (!outFS.is_open()) {
-    std::cout << "File output stream did not open" << '\n';
-  }
-
-  outFS << "P3" << endl;
-  outFS << columns << " " << rows << endl;
-  outFS << 255 << endl;
-
-  for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j < columns; ++j) {
-      for (int k = 0; k < 3; k++) {
-        outFS << colors.at(i).at(j) << " ";
-      }
-    }
-    outFS << endl;
-  }
+  red = RGB(data, rows, columns, Min, Max);
+  green = RGB(data, rows, columns, Min, Max);
+  blue = RGB(data, rows, columns, Min, Max);
+  outputData(red, green, blue, rows, columns, fileName);
 
   return 0;
 }
@@ -58,16 +39,16 @@ vector<vector<int>> loadData(int& rows, int& columns, string& fileName) {
   int temp;
   int i = 0; // row
   int j = 0; // column
-  //string fileName;
+
   // Get info from user
   std::cout << "Number of rows: " << '\n';
-  std::cin >> rows;// rows = 480;
+  std::cin >> rows;
 
   std::cout << "Number of Columns: " << '\n';
-  std::cin >> columns; //columns = 844;
+  std::cin >> columns;
 
   std::cout << "File Name: " << '\n';
-  std::cin >> fileName;// fileName = "map-input-844-480.dat";
+  std::cin >> fileName;
 
   // Open and load data
   inFS.open(fileName);
@@ -84,21 +65,6 @@ vector<vector<int>> loadData(int& rows, int& columns, string& fileName) {
    }
    data.push_back(row);
  }
- /*TESTING - Output data
- int w = 5;
- for (int i = 0; i < 10; ++i) {
-     cout << (i+1) << setw(w) << "|";
-   for (int j = 0; j < 10; ++j) {
-       cout << setw(w);
-       cout <<  data.at(i).at(j) << " ";
-   }
-   cout << endl;
- }
- cout << endl;*/
-
-
-  // Step 5: close (Do nothing will automatically close when stream variable is destroyed.)
-  //inFS.close(fileName);
   return data;
 }
 
@@ -119,6 +85,7 @@ int Extrema(int option, vector<vector<int>> v, int rows, int columns) {
 
 vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min, int max) {
   vector<vector<int>> colors;
+  // Color value = ((float)x-(float)Min)/((float)Max-(float)Min)
   for (int i = 0; i < rows; ++i) {
     vector<int> row;
     for (int j = 0; j < columns; ++j) {
@@ -126,17 +93,31 @@ vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min, i
     }
     colors.push_back(row);
   }
-/* TEST - Output data
-  int w = 3;
-  for (int i = 0; i < 10; ++i) {
-      cout << (i+1) << setw(w) << "|";
-    for (int j = 0; j < 10; ++j) {
-        cout << setw(w);
-        cout <<  colors.at(i).at(j) << " ";
-    }
-    cout << endl;
-  }
-  cout << endl;
-  */
   return colors;
+}
+
+void outputData(vector<vector<int>> r, vector<vector<int>> g, vector<vector<int>> b, int rows, int columns, string fileName) {
+  ofstream outFS;
+  string ext = ".ppm";
+  fileName.append(ext);
+  outFS.open(fileName);
+  if (!outFS.is_open()) {
+    std::cout << "File output stream did not open" << '\n';
+  }
+
+  // Header info
+  outFS << "P3" << endl;
+  outFS << columns << " " << rows << endl;
+  outFS << 255 << endl;
+
+  // Output values
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < columns; ++j) {
+      outFS << r.at(i).at(j) << " ";
+      outFS << g.at(i).at(j) << " ";
+      outFS << b.at(i).at(j) << " ";
+    }
+    outFS << endl;
+  }
+  return;
 }
