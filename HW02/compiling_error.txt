@@ -1,4 +1,0 @@
-C:\Users\josep\Google Drive\16.3\CSCE 121\HW\CSCE121-HW\HW02\Source.cpp: In function 'int main()':
-C:\Users\josep\Google Drive\16.3\CSCE 121\HW\CSCE121-HW\HW02\Source.cpp:62:17: error: 'system' was not declared in this scope
-   system("pause");
-                 ^
