@@ -7,9 +7,10 @@
 using namespace std;
 
 int main() {
-  auto som = 1 ;
-  som += 2;
+  int diff0, diff1, diff2 = 0;
 
-  std::cout << som << '\n';
+  std::cout << diff0 << '\n';
+  std::cout << diff1 << '\n';
+  std::cout << diff2 << '\n';
   return 0;
 }

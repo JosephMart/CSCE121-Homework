@@ -47,12 +47,30 @@ int main() {
   int color_g = 25;
   int color_b = 63;
   int start_row_top = 0;
-  int start_row_mid = (rows-1)/2;
+  int start_row_mid = (rows)/2;
   int start_row_bot = rows-1;
-  //
+  // First points
+  red.at(0).at(0) = color_r;
+  green.at(0).at(0) = color_g;
+  blue.at(0).at(0) = color_b;
+
+  red.at(start_row_mid).at(0) = color_r;
+  green.at(start_row_mid).at(0) = color_g;
+  blue.at(start_row_mid).at(0) = color_b;
+
+  red.at(data.size()-1).at(0) = color_r;
+  green.at(data.size()-1).at(0) = color_g;
+  blue.at(data.size()-1).at(0) = color_b;
+
+
+  int botD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_bot);
   int topD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_top);
   int midD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_mid);
-  int botD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_bot);
+
+  // last points
+
+
+
   outputData(red, green, blue, rows, columns, fileName);
 
   return 0;
@@ -154,55 +172,46 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
 
     int j = 0;
     int i = start_row;
-    int diff0, diff1, diff2 = 0;
+    int diff0 = 0;
+    int diff1 = 0;
+    int diff2 = 0;
     int minNum;
     int distance = 0;
 
-    while (j < heightMap[0].size()-1) {
-//      cout << heightMap[0].size() << endl;
-      bool unique = false;
-      abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
-      if (i < 2) {
-        // Check column values of 1 and 2
-          diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
-          diff2 = abs(heightMap.at(i).at(j) - heightMap.at(i+1).at(j+1));
-          minNum = min(diff1, diff2);
 
-          if (diff2 > diff1) {
-            ++i;
-          }
+    while (j < heightMap[0].size()-1) {      
 
-      } else if (i == heightMap.size()-1) {
+      if (i <= 0) {
+        diff1 = abs(heightMap.at(0).at(j) - heightMap.at(0).at(j+1));
+        diff2 = abs(heightMap.at(0).at(j) - heightMap.at(1).at(j+1));
+        diff0 = max(diff1,diff2)+ 1;
+
+      } else if (i >= heightMap.size()-1) {
         // Check column values of row and row - 1
         diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
         diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
-        minNum = min(diff0, diff1);
-
-        if (diff0 > diff1) {
-          --i;
-        }
+        diff2 = max(diff0, diff1) + 1;
       } else {
         diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
         diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
         diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i+1).at(j+1));
-        minNum = min(diff0, min(diff1, diff2));
-        // Check if unique
-
-        if (diff0 != diff1 && diff0 != diff1 && diff1 != diff2) {
-          unique = true;
-        }
-
-        if ((minNum == diff0) && unique) {
-          --i;
-        } else if ( ( (minNum == diff2) && unique) || (diff0 == diff2)){
-          ++i;
-        }
       }
-      distance += minNum;      
-      r.at(i).at(j) = color_r;
-      g.at(i).at(j) = color_g;
-      b.at(i).at(j) = color_b;
+
+      minNum = min(diff0, min(diff1, diff2));
+
+      if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
+        --i;
+      } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
+        ++i;
+      }
+
+      distance += minNum;
+      r.at(i).at(j+1) = color_r;
+      g.at(i).at(j+1) = color_g;
+      b.at(i).at(j+1) = color_b;
       ++j;
     }
+
+
     return distance;
   }
