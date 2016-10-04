@@ -20,8 +20,6 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
   vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
   int color_b, int start_row);
 
-
-
 int main() {
   vector<vector<int>> data;
   vector<vector<int>> red;
@@ -38,41 +36,17 @@ int main() {
   green = RGB(data, rows, columns, Min, Max);
   blue = RGB(data, rows, columns, Min, Max);
 
-  // Add func to change colors for three different paths
-    // First row (row index 0)
-    // Middle row (row index numRows/2 - don't forget this is integer division)
-    // Last row (row index numRows -1)
-  // Colors of path
+
   int color_r = 252;
   int color_g = 25;
   int color_b = 63;
   int start_row_top = 0;
   int start_row_mid = (rows)/2;
-  int start_row_bot = rows-1;
-  // First points
-  red.at(0).at(0) = color_r;
-  green.at(0).at(0) = color_g;
-  blue.at(0).at(0) = color_b;
-
-  red.at(start_row_mid).at(0) = color_r;
-  green.at(start_row_mid).at(0) = color_g;
-  blue.at(start_row_mid).at(0) = color_b;
-
-  red.at(data.size()-1).at(0) = color_r;
-  green.at(data.size()-1).at(0) = color_g;
-  blue.at(data.size()-1).at(0) = color_b;
-
-
+  int start_row_bot = data.size()-1;
   int botD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_bot);
   int topD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_top);
   int midD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_mid);
-
-  // last points
-
-
-
   outputData(red, green, blue, rows, columns, fileName);
-
   return 0;
 }
 
@@ -177,15 +151,15 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
     int diff2 = 0;
     int minNum;
     int distance = 0;
+    r.at(start_row).at(0) = color_r;
+    g.at(start_row).at(0) = color_g;
+    b.at(start_row).at(0) = color_b;
 
-
-    while (j < heightMap[0].size()-1) {      
-
+    while (j < heightMap[0].size()-1) {
       if (i <= 0) {
         diff1 = abs(heightMap.at(0).at(j) - heightMap.at(0).at(j+1));
         diff2 = abs(heightMap.at(0).at(j) - heightMap.at(1).at(j+1));
         diff0 = max(diff1,diff2)+ 1;
-
       } else if (i >= heightMap.size()-1) {
         // Check column values of row and row - 1
         diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
@@ -211,7 +185,5 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
       b.at(i).at(j+1) = color_b;
       ++j;
     }
-
-
     return distance;
   }
