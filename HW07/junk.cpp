@@ -7,10 +7,14 @@
 using namespace std;
 
 int main() {
-  int diff0, diff1, diff2 = 0;
+  std::vector<int> v;
 
-  std::cout << diff0 << '\n';
-  std::cout << diff1 << '\n';
-  std::cout << diff2 << '\n';
+
+  for (int i = 0; i < 9; i++) {
+    v.push_back(i);
+  }
+  int test = max(v);
+  cout << test << endl;
+  
   return 0;
 }

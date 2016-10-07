@@ -36,16 +36,33 @@ int main() {
   green = RGB(data, rows, columns, Min, Max);
   blue = RGB(data, rows, columns, Min, Max);
 
-
+  // Color for Red
   int color_r = 252;
   int color_g = 25;
   int color_b = 63;
-  int start_row_top = 0;
-  int start_row_mid = (rows)/2;
-  int start_row_bot = data.size()-1;
-  int botD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_bot);
-  int topD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_top);
-  int midD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_mid);
+  // int start_row_top = 0;
+  // int start_row_mid = (rows)/2;
+  // int start_row_bot = data.size()-1;
+  // int botD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_bot);
+  // int topD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_top);
+  // int midD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_mid);
+  int pathLength = 0;
+  int pathMin = colorPath(data, red, green, blue, color_r, color_g, color_b, 0);
+  int greenRow = 0;
+
+  // Change all shortests paths to red
+  for (int i = 0; i < data.size(); i++) {
+    pathLength = colorPath(data, red, green, blue, color_r, color_g, color_b, i);
+    if (pathLength < pathMin) {
+      greenRow = i;
+      pathMin = pathLength;
+    }
+  }
+
+  // Set shortest path to Green
+  colorPath(data, red, green, blue, 31, 253, 13, greenRow);
+
+  // Calculate the min path length
   outputData(red, green, blue, rows, columns, fileName);
   return 0;
 }
