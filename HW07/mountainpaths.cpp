@@ -19,6 +19,18 @@ void outputData(vector<vector<int>> r, vector<vector<int>> g,
 int colorPath(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
   int color_r, int color_g, int color_b, int start_row, int start_col = 0);
 
+void pathNorth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+  int color_r, int color_g, int color_b, int start_row, int start_col);
+
+void pathSouth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+  int color_r, int color_g, int color_b, int start_row, int start_col);
+
+void pathEast(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+  int color_r, int color_g, int color_b, int start_row, int start_col);
+
+void pathWest(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+  int color_r, int color_g, int color_b, int start_row, int start_col);
+
 int main() {
   vector<vector<int>> data;
   vector<vector<int>> red;
@@ -206,3 +218,22 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
     }
     return distance;
   }
+  void pathNorth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+    int color_r, int color_g, int color_b, int start_row, int start_col) {
+
+    }
+
+  void pathSouth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+    int color_r, int color_g, int color_b, int start_row, int start_col) {
+
+    }
+
+  void pathEast(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+    int color_r, int color_g, int color_b, int start_row, int start_col) {
+
+    }
+
+  void pathWest(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+    int color_r, int color_g, int color_b, int start_row, int start_col) {
+      
+    }
