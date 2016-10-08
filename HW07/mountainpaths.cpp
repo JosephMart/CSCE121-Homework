@@ -16,20 +16,25 @@ vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min,
 void outputData(vector<vector<int>> r, vector<vector<int>> g,
   vector<vector<int>> b, int rows, int columns, string fileName);
 
-int colorPath(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-  int color_r, int color_g, int color_b, int start_row, int start_col = 0);
+int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+  vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+  int color_b, int start_row, int start_col = 0);
 
-void pathNorth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-  int color_r, int color_g, int color_b, int start_row, int start_col);
+void pathNorth(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+  vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+  int color_b, int start_row, int start_col);
 
-void pathSouth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-  int color_r, int color_g, int color_b, int start_row, int start_col);
+void pathSouth(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+  vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+  int color_b, int start_row, int start_col);
 
-void pathEast(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-  int color_r, int color_g, int color_b, int start_row, int start_col);
+void pathEast(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+  vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+  int color_b, int start_row, int start_col);
 
-void pathWest(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-  int color_r, int color_g, int color_b, int start_row, int start_col);
+void pathWest(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+  vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+  int color_b, int start_row, int start_col);
 
 int main() {
   vector<vector<int>> data;
@@ -71,11 +76,13 @@ int main() {
   int start_row, start_col;
 
   // This line tries to read two more integers from cin, and assigns false to has_extra_input if the read fails
-  bool has_extra_input = (cin >> start_row >> start_col);
+  // bool has_extra_input = (cin >> start_row >> start_col);
+  cin >> start_row >> start_col;
 
-  if (has_extra_input) {
-    colorPath(data, red, green, blue, 19, 254, 253, start_row, start_col);
-  }
+  // if (has_extra_input) {
+  //   colorPath(data, red, green, blue, 19, 254, 253, start_row, start_col);
+  // }
+  colorPath(data, red, green, blue, 19, 254, 253, start_row, start_col);
 
   outputData(red, green, blue, rows, columns, fileName);
   return 0;
@@ -182,58 +189,183 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
     int diff2 = 0;
     int minNum;
     int distance = 0;
-    r.at(start_row).at(0) = color_r;
-    g.at(start_row).at(0) = color_g;
-    b.at(start_row).at(0) = color_b;
 
-    while (j < heightMap[0].size()-1) {
-      if (i <= 0) {
-        diff1 = abs(heightMap.at(0).at(j) - heightMap.at(0).at(j+1));
-        diff2 = abs(heightMap.at(0).at(j) - heightMap.at(1).at(j+1));
-        diff0 = max(diff1,diff2) +   1;
-      } else if (i >= heightMap.size()-1) {
-        // Check column values of row and row - 1
-        diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
-        diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
-        diff2 = max(diff0, diff1) + 1;
-      } else {
-        diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
-        diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
-        diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i+1).at(j+1));
+    if (start_col != 0) {
+      pathNorth(heightMap, r, g, b, color_r, color_g, color_b, start_row, start_col);
+      pathSouth(heightMap, r, g, b, color_r, color_g, color_b, start_row, start_col);
+      pathEast(heightMap, r, g, b, color_r, color_g, color_b, start_row, start_col);
+      pathWest(heightMap, r, g, b, color_r, color_g, color_b, start_row, start_col);
+    } else {
+      r.at(start_row).at(0) = color_r;
+      g.at(start_row).at(0) = color_g;
+      b.at(start_row).at(0) = color_b;
+
+      while (j < heightMap[0].size()-1) {
+        if (i <= 0) {
+          diff1 = abs(heightMap.at(0).at(j) - heightMap.at(0).at(j+1));
+          diff2 = abs(heightMap.at(0).at(j) - heightMap.at(1).at(j+1));
+          diff0 = max(diff1,diff2) +   1;
+        } else if (i >= heightMap.size()-1) {
+          // Check column values of row and row - 1
+          diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
+          diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
+          diff2 = max(diff0, diff1) + 1;
+        } else {
+          diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
+          diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
+          diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i+1).at(j+1));
+        }
+
+        minNum = min(diff0, min(diff1, diff2));
+
+        if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
+          --i;
+        } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
+          ++i;
+        }
+
+        distance += minNum;
+        r.at(i).at(j+1) = color_r;
+        g.at(i).at(j+1) = color_g;
+        b.at(i).at(j+1) = color_b;
+        ++j;
       }
-
-      minNum = min(diff0, min(diff1, diff2));
-
-      if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
-        --i;
-      } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
-        ++i;
-      }
-
-      distance += minNum;
-      r.at(i).at(j+1) = color_r;
-      g.at(i).at(j+1) = color_g;
-      b.at(i).at(j+1) = color_b;
-      ++j;
     }
     return distance;
   }
-  void pathNorth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-    int color_r, int color_g, int color_b, int start_row, int start_col) {
 
+  void pathNorth(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+    vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+    int color_b, int start_row, int start_col) {
+
+      int j = start_col;
+      int i = start_row;
+      int diff0 = 0;
+      int diff1 = 0;
+      int diff2 = 0;
+      int minNum;
+      r.at(start_row).at(start_col) = color_r;
+      g.at(start_row).at(start_col) = color_g;
+      b.at(start_row).at(start_col) = color_b;
+
+      while (i > 0 ) {
+          diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j-1));
+          diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j));
+          diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i-1).at(j+1));
+
+        minNum = min(diff0, min(diff1, diff2));
+
+        if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
+          --j;
+        } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
+          ++j;
+        }
+
+        --i;
+        r.at(i).at(j) = color_r;
+        g.at(i).at(j) = color_g;
+        b.at(i).at(j) = color_b;
+      }
     }
 
-  void pathSouth(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-    int color_r, int color_g, int color_b, int start_row, int start_col) {
+    void pathSouth(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+      vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+      int color_b, int start_row, int start_col) {
 
-    }
+        int j = start_col;
+        int i = start_row;
+        int diff0 = 0;
+        int diff1 = 0;
+        int diff2 = 0;
+        int minNum;
+        r.at(start_row).at(start_col) = color_r;
+        g.at(start_row).at(start_col) = color_g;
+        b.at(start_row).at(start_col) = color_b;
 
-  void pathEast(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-    int color_r, int color_g, int color_b, int start_row, int start_col) {
+        while (i < heightMap.size()-1 ) {
+            diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i+1).at(j-1));
+            diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i+1).at(j));
+            diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i+1).at(j+1));
 
-    }
+          minNum = min(diff0, min(diff1, diff2));
 
-  void pathWest(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
-    int color_r, int color_g, int color_b, int start_row, int start_col) {
-      
-    }
+          if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
+            --j;
+          } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
+            ++j;
+          }
+
+          ++i;
+          r.at(i).at(j) = color_r;
+          g.at(i).at(j) = color_g;
+          b.at(i).at(j) = color_b;
+        }
+      }
+
+    void pathEast(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+      vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+      int color_b, int start_row, int start_col) {
+
+        int j = start_col;
+        int i = start_row;
+        int diff0 = 0;
+        int diff1 = 0;
+        int diff2 = 0;
+        int minNum;
+        r.at(start_row).at(start_col) = color_r;
+        g.at(start_row).at(start_col) = color_g;
+        b.at(start_row).at(start_col) = color_b;
+
+        while (j < heightMap.at(0).size() ) {
+            diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));
+            diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j+1));
+            diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i+1).at(j+1));
+
+          minNum = min(diff0, min(diff1, diff2));
+
+          if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
+            --i;
+          } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
+            ++i;
+          }
+
+          ++j;
+          r.at(i).at(j) = color_r;
+          g.at(i).at(j) = color_g;
+          b.at(i).at(j) = color_b;
+        }
+      }
+
+      void pathWest(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
+        vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
+        int color_b, int start_row, int start_col) {
+
+          int j = start_col;
+          int i = start_row;
+          int diff0 = 0;
+          int diff1 = 0;
+          int diff2 = 0;
+          int minNum;
+          r.at(start_row).at(start_col) = color_r;
+          g.at(start_row).at(start_col) = color_g;
+          b.at(start_row).at(start_col) = color_b;
+
+          while (j > 0 ) {
+              diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j-1));
+              diff1 = abs(heightMap.at(i).at(j) - heightMap.at(i).at(j-1));
+              diff2 = abs(heightMap.at(i).at(j)- heightMap.at(i+1).at(j-1));
+
+            minNum = min(diff0, min(diff1, diff2));
+
+            if ((minNum == diff0) && (diff0 != diff1) && (diff0 != diff2)) {
+              --i;
+            } else if ( ((minNum == diff2) && (diff1 != diff2)) || (diff0 == diff2 && (diff2 < diff1))) {
+              ++i;
+            }
+
+            --j;
+            r.at(i).at(j) = color_r;
+            g.at(i).at(j) = color_g;
+            b.at(i).at(j) = color_b;
+          }
+        }
