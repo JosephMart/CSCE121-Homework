@@ -16,9 +16,8 @@ vector<vector<int>> RGB(vector<vector<int>> v, int rows, int columns, int min,
 void outputData(vector<vector<int>> r, vector<vector<int>> g,
   vector<vector<int>> b, int rows, int columns, string fileName);
 
-int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
-  vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
-  int color_b, int start_row);
+int colorPath(const vector>& heightMap, vector>& r, vector>& g, vector>& b,
+  int color_r, int color_g, int color_b, int start_row, int start_col = 0);
 
 int main() {
   vector<vector<int>> data;
@@ -40,12 +39,6 @@ int main() {
   int color_r = 252;
   int color_g = 25;
   int color_b = 63;
-  // int start_row_top = 0;
-  // int start_row_mid = (rows)/2;
-  // int start_row_bot = data.size()-1;
-  // int botD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_bot);
-  // int topD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_top);
-  // int midD = colorPath(data, red, green, blue, color_r, color_g, color_b, start_row_mid);
   int pathLength = 0;
   int pathMin = colorPath(data, red, green, blue, color_r, color_g, color_b, 0);
   int greenRow = 0;
@@ -62,7 +55,16 @@ int main() {
   // Set shortest path to Green
   colorPath(data, red, green, blue, 31, 253, 13, greenRow);
 
-  // Calculate the min path length
+  // handle the extra input
+  int start_row, start_col;
+
+  // This line tries to read two more integers from cin, and assigns false to has_extra_input if the read fails
+  bool has_extra_input = (cin >> start_row >> start_col);
+
+  if (has_extra_input) {
+    colorPath(data, red, green, blue, 19, 254, 253, start_row, start_col);
+  }
+
   outputData(red, green, blue, rows, columns, fileName);
   return 0;
 }
@@ -75,14 +77,14 @@ vector<vector<int>> loadData(int& rows, int& columns, string& fileName) {
   int j = 0; // column
 
   // Get info from user
-  std::cout << "Number of rows: " << '\n';
-  std::cin >> rows;
+  cout << "Number of rows: " << '\n';
+  cin >> rows;
 
-  std::cout << "Number of Columns: " << '\n';
-  std::cin >> columns;
+  cout << "Number of Columns: " << '\n';
+  cin >> columns;
 
-  std::cout << "File Name: " << '\n';
-  std::cin >> fileName;
+  cout << "File Name: " << '\n';
+  cin >> fileName;
 
   // Open and load data
   inFS.open(fileName);
@@ -159,7 +161,7 @@ void outputData(vector<vector<int>> r, vector<vector<int>> g, vector<vector<int>
 // Output distance and change colors
 int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
   vector<vector<int>>& g, vector<vector<int>>& b, int color_r, int color_g,
-  int color_b, int start_row) {
+  int color_b, int start_row, int start_col) {
 
     int j = 0;
     int i = start_row;
@@ -176,7 +178,7 @@ int colorPath(const vector<vector<int>>& heightMap, vector<vector<int>>& r,
       if (i <= 0) {
         diff1 = abs(heightMap.at(0).at(j) - heightMap.at(0).at(j+1));
         diff2 = abs(heightMap.at(0).at(j) - heightMap.at(1).at(j+1));
-        diff0 = max(diff1,diff2)+ 1;
+        diff0 = max(diff1,diff2) +   1;
       } else if (i >= heightMap.size()-1) {
         // Check column values of row and row - 1
         diff0 = abs(heightMap.at(i).at(j) - heightMap.at(i-1).at(j+1));

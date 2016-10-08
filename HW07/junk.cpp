@@ -6,15 +6,18 @@
 #include <cmath>
 using namespace std;
 
-int main() {
-  std::vector<int> v;
 
 
-  for (int i = 0; i < 9; i++) {
-    v.push_back(i);
-  }
-  int test = max(v);
-  cout << test << endl;
-  
-  return 0;
+int printValues(int x, int y=10)
+{
+    std::cout << "x: " << x << '\n';
+    std::cout << "y: " << y << '\n';
+    return 0;
+}
+
+int main()
+{
+    int x = printValues(1); // y will use default parameter of 10
+    int y = printValues(3, 4); // y will use user-supplied value 4
+    return 0;
 }
