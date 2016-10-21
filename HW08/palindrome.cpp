@@ -1,51 +1,58 @@
 #include "functions.h"
 
 int main(int argc, char const *argv[]) {
+  // Get program name into a string
+  string name = argv[0];
 
-  if (false) {
-    printUsageInfo();
+  // If no arguments, print usage
+  if (argc < 2) {
+      printUsageInfo(name);
   } else {
-
+    // Initialize parameter restriction booleans
     bool spaceS = false;
     bool caseS = false;
-    int start;
+
     // Check if there is a flag
     string flagTest = argv[1];
-    if (flagTest.at(0) == '-') {
-      start = 2;
-      flagTest = flagTest.substr(1, flagTest.size()-1);
+    int i = checkFlag(flagTest, caseS, spaceS);
 
-      // Lower flag(s) and compare
-      for(int i = 0; flagTest[i] != '\0'; i++){
-    		  flagTest[i] = tolower(flagTest[i]);
-          if (flagTest.at(i) == 'c') {
-            caseS = true;
-          } else if(flagTest.at(i) == 's') {
-              spaceS = true;
+      // Check if is an argument after the parameter
+      if (i == 2 && argc == 2 ) {
+            printUsageInfo(name);
+          } else {
+            while (i < argc) {
+              // Check if 3rd item is -c or -s
+              if (i == 2) {
+                string test = argv[i];
+                if (test.at(0) == '-') {
+                  if (argc < 4){
+                    printUsageInfo(name);
+                    break;
+                  } else {
+                    i = 1 + checkFlag(test, caseS, spaceS);
+                  }
+                }
+              }
+              // Remove punctuation
+              string word = argv[i];
+              for (int j = 0; j < word.size(); ++j) {
+                  if (ispunct(word.at(j)) || word.at(j) == '?') {
+                      word.erase(word.begin()+j);
+                  }
+                }
+
+              // Run the recursivly checking isPalindrome function
+              bool pal = isPalindrome(word, caseS, spaceS);
+
+              // Print results to the user
+              if (pal) {
+                cout << "\"" << argv[i] << "\" is a palindrome" << endl;
+              } else {
+                cout << "\"" << argv[i] << "\" is not a palindrome" << endl;
+              }
+              ++i;
+            }
           }
         }
-      } else {
-        start = 1;
-    }
-
-    string word;
-    // Convert command argument into one string
-    while (start < argc) {
-      word.append(argv[start]);
-      word.append(" ");
-      ++start;
-    }
-    word.erase(word.size()-1);
-
-
-    bool pal = isPalindrome(word, caseS, spaceS);
-    std::cout << pal << std::endl;
-    if (pal) {
-      cout << word << " is a palindrome" << endl;
-    } else {
-      cout << word << " is not a palindrome" << endl;
-    }
-
-  }
-  return 0;
-}
+        return 0;
+      }
