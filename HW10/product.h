@@ -29,5 +29,13 @@ class Product {
     double totalPaid = 0.0;
 };
 
+// void addShipment(int shipmentQuantity, double shipmentCost);
+// Add shipmentQuantity to inventory and increase totalPaid by shipmentCost. Do not replace totalPaid, just increase its value. If you get a negative shipmentQuantity or a negative shipmentCost, throw an exception.
+// void reduceInventory(int purchaseQuantity);
+// If there is not enough inventory, throw an exception. Otherwise, decrease inventory by purchaseQuantity and increase numSold by purchaseQuantity. If the purchaseQuantity is negative, throw an exception.
+// double getPrice();
+// This function will calculate the current price based on the average cost per item over time plus a 25% markup.
+// price = (totalPaid / (inventory + numSold)) * 1.25.
+// Warning: avoid integer division!
 
 #endif
