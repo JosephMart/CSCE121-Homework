@@ -12,7 +12,7 @@ class Customer {
   public:
     Customer ();
     Customer ( string name = "Null", int ID = 0, bool cred = false);
-    string getCustomer() const { return customerName; }
+    string getName() const { return customerName; }
     void setName( string name ) { customerName = name; }
     int getID() const { return customerID; }
     bool getCredit() const { return credit; }
