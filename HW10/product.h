@@ -5,6 +5,7 @@
 #define PRODUCT_H
 #include <string>
 using namespace std;
+#include "store.h"
 
 class Product {
   public:
@@ -17,8 +18,8 @@ class Product {
     int getNumberSold() { return numSold; }
     double getTotalPaid() { return totalPaid; }
     int getInventoryCount() { return inventory; }
-    // + getPrice() : dollars
-    // + addShipment(quantity, cost)
+    double getPrice() { return (totalPaid / (inventory + numSold)) * 1.25;}
+    void addShipment( int quantity, double shipmentCost) { totalPaid += shipmentCost;}
     void reduceInventory( int quanity ) { inventory -= quanity; }
   private:
     int productID = 0;
@@ -30,7 +31,6 @@ class Product {
 };
 
 // void addShipment(int shipmentQuantity, double shipmentCost);
-// Add shipmentQuantity to inventory and increase totalPaid by shipmentCost. Do not replace totalPaid, just increase its value. If you get a negative shipmentQuantity or a negative shipmentCost, throw an exception.
 // void reduceInventory(int purchaseQuantity);
 // If there is not enough inventory, throw an exception. Otherwise, decrease inventory by purchaseQuantity and increase numSold by purchaseQuantity. If the purchaseQuantity is negative, throw an exception.
 // double getPrice();
