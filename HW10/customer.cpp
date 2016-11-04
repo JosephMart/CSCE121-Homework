@@ -12,28 +12,39 @@ Customer::Customer() : customerName("Null"), customerID(0), credit("false"),
 Customer::Customer ( string name, int ID, bool cred) :
   customerName(name), customerID(ID), credit(cred) { ++customers;}
 
-void Customer::processPurchase( double amount, Product product) {
-  balance -= amount;
+void Customer::processPurchase ( double amount, Product product) {
+  if (credit) {
+    balance -= amount;
+  } else {
+    if (balance > amount) {
+      balance -= amount;
+    } else {
+      throw "Error";
+    }
+  }
   productsPurchased.push_back(product);
 }
 
 void Customer::processPayment( double amount ) {
-  // void processPayment(double amount);
-  // Add amount to balance. If amount is negative, throw an exception
-  balance -= amount;
+  if (amount < 0) {
+    throw "Amount is Negative";
+  } else {
+    balance += amount;
+  }
 }
 
 void Customer::listProductsPurchased(ostream& os) {
-  std::cout << "Products bought by " << customerName << "(" << customerID << "):" << std::endl << endl;
+  os << "Products bought by " << customerName << "(" << customerID << "):" << std::endl << endl;
   for (int i = 0; i <= customers; i++) {
-    cout << productsPurchased.at(i);
-    std::cout << std::endl;
+    os << productsPurchased.at(i);
+    os << std::endl;
   }
 }
 
 std::ostream& operator<<(std::ostream& os, const Customer& c) {
-    cout << "Customer ID: " << c.customerID << "\n";
-    cout << "Customer Name: " << c.customerName << endl;
-    cout << "Credit: " << c.credit << endl;
-    std::cout << "Balance: " << c.balance << endl;
+    os << "Customer Name: " << c.customerName << endl;
+    os << "Customer ID: " << c.customerID << "\n";
+    os << "Credit: " << c.credit << endl;
+    os << "Balance: " << c.balance << endl;
+    return os;
 }

@@ -19,12 +19,12 @@ class Product {
     int getInventoryCount() { return inventory; }
     double getPrice() const;
     void addShipment(int shipmentQuantity, double shipmentCost);
-    void reduceInventory( int quanity ) { inventory -= quanity; }
+    void reduceInventory( int quanity );
     friend std::ostream& operator<<(std::ostream& os, const Product& p);
   private:
     int productID = 0;
-    string productName = "Null";
-    string description = "Null";
+    string productName = " ";
+    string description = " ";
     int inventory = 0;
     int numSold = 0;
     double totalPaid = 0.0;
