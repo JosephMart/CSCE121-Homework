@@ -3,7 +3,7 @@
 *******************************************************************************/
 #include "product.h"
 #include <iostream>
-#include <exception>
+#include <stdexcept>
 using namespace std;
 
 Product::Product() : productID(0), productName("Null"), description("Null"),
@@ -21,32 +21,26 @@ double Product::getPrice() const {
 }
 
 void Product::addShipment(int shipmentQuantity, double shipmentCost) {
-  // Add shipmentQuantity to inventory and increase totalPaid by shipmentCost.
-  // Do not replace totalPaid, just increase its value. If you get a negative
-  // shipmentQuantity or a negative shipmentCost, throw an exception.
-  if (shipmentQuantity < 0) {
-    throw "Negative shipment";
-  } else {
+  if (shipmentQuantity >= 0 && shipmentCost >= 0) {
     inventory += shipmentQuantity;
     totalPaid += shipmentCost;
+  } else {
+    throw runtime_error("");
   }
 }
 
-void Product::reduceInventory( int quanity ) {
-  if (quanity > inventory || quanity < 0) {
-    throw "Not enough inventory";
-  } else {
-    inventory -= quanity;
-  }
+void Product::reduceInventory( int quantity ) {
+    if(quantity < inventory && quantity > 0 ) {
+    	inventory -= quantity;
+      numSold += quantity;
+    } else {
+        throw runtime_error("");
+    }
 }
 
 
 std::ostream& operator<<(std::ostream& os, const Product& p) {
     os << "Product ID: " << p.productID << std::endl;
-    os << "Prodcut Name: " <<  p.productName << std::endl;
-    os << "Inventory: " << p.inventory << std::endl;
-    os << "Number Sold: " << p.numSold << std::endl;
-    os << "Price: " << p.getPrice() << std::endl;
-    os  << "Description: " << p.description << std::endl;
+    os << "Prodcut Name: " <<  p.productName << std::endl;    
     return os;
 }
