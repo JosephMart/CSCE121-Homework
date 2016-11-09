@@ -10,6 +10,7 @@ class Product {
   public:
     Product();
     Product(int productID, string productName);
+
     string getDescription() { return description; }
     void setDescription(string i) { description = i; }
     string getName() { return productName; }

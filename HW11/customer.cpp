@@ -19,10 +19,10 @@ void Customer::processPurchase ( double amount, Product product) {
   }
   else {
     if (credit) {
-      balance -= amount;
+      balance -= amount * product.getPrice();
     } else {
-      if (balance > amount) {
-        balance -= amount;
+      if (balance >= amount * product.getPrice()) {
+        balance -= amount * product.getPrice();
       } else {
         throw runtime_error("");
       }
