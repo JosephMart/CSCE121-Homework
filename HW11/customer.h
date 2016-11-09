@@ -21,7 +21,7 @@ class Customer {
     double getBalance() const { return balance; }
     void listProductsPurchased(ostream& os);
     void processPayment(double amount);
-    void processPurchase(double amount, Product product);
+    void processPurchase(double amount, Product& product);
     friend std::ostream& operator<<(std::ostream& os, const Customer& c);
   private:
     string customerName;

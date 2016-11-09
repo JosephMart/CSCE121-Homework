@@ -13,8 +13,8 @@ Customer::Customer() : customerName("Null"), customerID(0), credit("false"),
 Customer::Customer ( string name, int ID, bool cred) :
   customerName(name), customerID(ID), credit(cred) { ++customers;}
 
-void Customer::processPurchase ( double amount, Product product) {
-  if (amount < 0){
+void Customer::processPurchase ( double amount, Product& product) {
+  if (amount < 0 || amount > product.getInventoryCount()){
     throw runtime_error("");
   }
   else {
@@ -28,6 +28,7 @@ void Customer::processPurchase ( double amount, Product product) {
       }
     }
   }
+  product.reduceInventory(amount);
   productsPurchased.push_back(product);
 }
 void Customer::processPayment( double amount ) {
