@@ -8,7 +8,7 @@ HW instructions are from [here](http://courses.cse.tamu.edu/jmichael/f16/121/hom
 | [HW1: Annual Growth](http://courses.cse.tamu.edu/jmichael/f16/121/homework/1/)             |    N/A    |
 | [HW2: QuadraticEquation](http://courses.cse.tamu.edu/jmichael/f16/121/homework/2/)         |    N/A    |
 | [HW3: Bulls & Cows](http://courses.cse.tamu.edu/jmichael/f16/121/homework/3/)              |    N/A    |
-| [HW4: Bulls & Cows](http://courses.cse.tamu.edu/jmichael/f16/121/homework/4/)              |   80/80   |
+| [HW4: Bulls & Cows](http://courses.cse.tamu.edu/jmichael/f16/121/homework/3/)              |   80/80   |
 | [HW5: Mountain Paths (Part I)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/5/)   |  100/100  |
 | [HW6: Mountain Paths (Part II)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/6/)  |  100/100  |
 | [HW7: Mountain Paths (Part III)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/7/) |  104/100  |
