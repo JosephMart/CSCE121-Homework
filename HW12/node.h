@@ -2,8 +2,8 @@
 #define NODE
 
 // Include the header file for the data struct/class if you use one.
-// For example, if you have a Data class in Data.h, put
-//  #include "Data.h"
+// For example, if you have a data class in data.h, put
+//  #include "data.h"
 // below.
 
 struct Node {
@@ -23,6 +23,9 @@ struct Node {
 	Node(/*FIXME */) : next(nullptr) {
 		// Initialize your data members properly inside the function body
 	}
+
+  // The function below is written. Do not modify it
+	virtual ~Node() {}
 };
 
 #endif

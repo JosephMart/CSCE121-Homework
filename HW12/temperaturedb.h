@@ -2,7 +2,7 @@
 #define TEMP_DB
 
 #include <string>
-#include "LinkedList.h"
+#include "linkedlist.h"
 
 class TemperatureDatabase {
 public:

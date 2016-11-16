@@ -1,4 +1,4 @@
-#include "TemperatureDB.h"
+#include "temperaturedb.h"
 
 #include <fstream>
 using namespace std;

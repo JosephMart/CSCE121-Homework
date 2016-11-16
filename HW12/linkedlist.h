@@ -2,9 +2,10 @@
 #define LINKEDLIST
 
 #include <iostream>
-#include "Node.h"
+#include "node.h"
 
 class LinkedList {
+private:
 	Node* head;
 	Node* tail;
 
