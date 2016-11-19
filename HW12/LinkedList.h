@@ -7,6 +7,7 @@
 class LinkedList {
 	Node* head;
 	Node* tail;
+	// Data* tempData;
 
 public:
 	// Default constructor
