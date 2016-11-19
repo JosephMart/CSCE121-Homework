@@ -11,5 +11,7 @@ int main(int argc, char** argv) {
 		TemperatureDatabase database;
 		database.loadData(argv[1]);
 		database.performQuery(argv[2]);
+		
 	}
+	
 }
