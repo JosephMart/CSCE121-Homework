@@ -1,7 +1,7 @@
 #include "Temperaturedb.h"
-
 #include <fstream>
 #include <iostream>
+#include <typeinfo>
 using namespace std;
 
 void TemperatureDatabase::loadData(const string& filename) {
@@ -9,13 +9,14 @@ void TemperatureDatabase::loadData(const string& filename) {
 	string line;
 	ifstream myfile (filename);
 	int i = 0;
+	int location;
+	int year;
+	int month;
+	double temperature;
 	if (myfile.is_open()) {
+
     	while ( myfile >> line ) {
-			int location;
-			int year;
-			int month;
-			double temperature;
-			
+
 			if(i == 0) {
 				location = atoi(line.c_str());
 				++i;
@@ -23,16 +24,20 @@ void TemperatureDatabase::loadData(const string& filename) {
 				year =  atoi(line.c_str());
 				++i;
 			} else if (i == 2) {
-				month ==  atoi(line.c_str());
+				month =  atoi(line.c_str());
 				++i;
 			} else if (i == 3) {
-				temperature =  atoi(line.c_str());
+				temperature =  atof(line.c_str());
+				if(temperature > 50 || temperature < -50) {
+					// cout << "error" << endl;
+				}
+				records.insert(location, year, month, temperature);
 				i = 0;
+				
 			} // else throw error
-			
-      		records.insert(location, year, month, temperature);// << line << '\n';
-			cout << i << endl;
+
     	}
+		//cout << records << endl;
     	myfile.close();
   	} else
 	   cout << "Unable to open file";

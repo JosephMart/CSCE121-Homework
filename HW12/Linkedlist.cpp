@@ -26,7 +26,7 @@ LinkedList& LinkedList::operator=(const LinkedList& source) {
 		// Allocate new memory & Copy data from source
 		const Node* temp = source.head;
 		while (temp) {
-			insert(temp->data.getLocation(), temp->data.getYear(), temp->data.getMonth(), temp->data.getValue());
+			insert(temp->Location, temp->Year, temp->Month, temp->tempValue);
 			temp = temp->next;
 		}
 	}
@@ -35,6 +35,10 @@ LinkedList& LinkedList::operator=(const LinkedList& source) {
 
 void LinkedList::insert(int location, int year, int month, double temperature) {
 	// Implement this function
+	// Data1 dataTemp = Data1(location, year, month, temperature);
+	Node* n = new Node(location, year, month, temperature);
+	n->next = head;
+	head = n;
 }
 
 void LinkedList::clear() {
@@ -60,18 +64,19 @@ void LinkedList::print(ostream& os) const {
 }
 
 ostream& operator<<(ostream& os, const LinkedList& ll) {
-	os << ll.getName() << " {";
 	Node* current = ll.head;
 	if (current == nullptr) {
 		os << " <Empty List>";
 	}
 	while (current != nullptr) {
-		if (current != ll.head)
-			cout << ",";
-		cout << " " << current->value;
-		current = current->next;
+		// if (current != ll.head) {
+			os << "Location: " << current->Location << endl;
+			os << "Year: " << current->Year << endl;
+			os << "Month: " << current->Month << endl;
+			os << "Temperature: " << current->tempValue << endl;
+			os << endl;
+			current = current->next;
+		// }
 	}
-	cout << " }";
 	return os;
-    
 }
