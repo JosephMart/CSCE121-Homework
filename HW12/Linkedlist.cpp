@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "LinkedList.h"
+#include "Linkedlist.h"
 using namespace std;
 
 LinkedList::LinkedList() {
@@ -60,6 +60,18 @@ void LinkedList::print(ostream& os) const {
 }
 
 ostream& operator<<(ostream& os, const LinkedList& ll) {
-	// Implement this function
+	os << ll.getName() << " {";
+	Node* current = ll.head;
+	if (current == nullptr) {
+		os << " <Empty List>";
+	}
+	while (current != nullptr) {
+		if (current != ll.head)
+			cout << ",";
+		cout << " " << current->value;
+		current = current->next;
+	}
+	cout << " }";
+	return os;
     
 }

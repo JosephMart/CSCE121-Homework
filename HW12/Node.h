@@ -12,7 +12,7 @@ struct Node {
 	// You can use an extra struct/class for storing the data. In that case, put
 	// your definition of the data class in a separate header file, for example:
 	// data.h
-	Data data;
+	Data1 data;
 
 	// Pointer to the next node in the linked list
 	Node* next;

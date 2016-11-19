@@ -1,4 +1,4 @@
-class Data {
+class Data1 {
     int Location;
     int Year;
     int Month;
