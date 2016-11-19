@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "temperaturedb.h"
+=======
+#include "Temperaturedb.h"
+>>>>>>> master
 
 #include <iostream>
 using namespace std;
