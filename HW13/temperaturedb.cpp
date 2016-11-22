@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <math.h>
+#include "iostream"
 using namespace std;
 
 void TemperatureDatabase::loadData(const string& filename) {
