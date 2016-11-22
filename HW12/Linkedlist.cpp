@@ -42,36 +42,36 @@ void LinkedList::insert(int location, int year, int month, double temperature) {
 
 }
 
-Node* LinkedList::sort(Node* head) {
-	Node* curr;
-	Node* prev;
-	curr = head;
+// Node* LinkedList::sort(Node* head) {
+// 	Node* curr;
+// 	Node* prev;
+// 	curr = head;
 
-	while( curr->next != NULL){
-		if(curr == head){
-             head = curr->next;
-             curr->next = head->next;
-             head->next = curr;
-             prev = head;
-         }
-     	else if(curr->Year > curr->next->Year){
-                  head = curr->next;
-                  curr->next = head->next;
-                  head->next = curr;
-                  prev = head;
-        } else if(curr -> next -> next != NULL){
+// 	while( curr->next != NULL){
+// 		if(curr == head){
+//              head = curr->next;
+//              curr->next = head->next;
+//              head->next = curr;
+//              prev = head;
+//          }
+//      	if(curr->Year > curr->next->Year){
+//                   head = curr->next;
+//                   curr->next = head->next;
+//                   head->next = curr;
+//                   prev = head;
+//         } else if(curr -> next -> next != NULL){
 
-                  prev->next = curr->next;
-                  curr->next = prev->next->next;
-                  prev->next->next = curr;
+//                   prev->next = curr->next;
+//                   curr->next = prev->next->next;
+//                   prev->next->next = curr;
 
-        }else if(head != curr){
-            prev = prev->next;
-        }else{}
-		 curr = curr->next;
-    }
- 	return head;
-}
+//         }else if(head != curr){
+//             prev = prev->next;
+//         }else{}
+// 		 curr = curr->next;
+//     }
+//  	return head;
+// }
 
 void LinkedList::clear() {
 	// Implement this function
