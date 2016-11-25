@@ -3,7 +3,6 @@
 
 #include <ostream>
 #include "node.h"
-#include "query.h"
 
 class LinkedList {
 private:

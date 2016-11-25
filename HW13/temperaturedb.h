@@ -2,7 +2,6 @@
 #define TEMP_DB
 
 #include "linkedlist.h"
-#include "query.h"
 #include <string>
 
 class TemperatureDatabase {
