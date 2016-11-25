@@ -33,7 +33,17 @@ void TemperatureDatabase::loadData(const string& filename) {
 }
 
 void TemperatureDatabase::performQuery(const string& filename) {
-  // Implement this function
+  	// Implement this function
+  	ifstream fin(filename);
+	if(!fin) throw runtime_error("Failed to open file " + filename);
+	std::ofstream ofs ("results.dat", std::ofstream::out);
+  	Query statment;
+
+  	while (fin >> statment) {
+		if (records.query(statment)) {
+			ofs << statment << endl;
+		}
+  	}
 }
 
 bool TemperatureDatabase::isValidEntry(const Data& entry) {

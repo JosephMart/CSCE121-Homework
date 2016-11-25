@@ -1,7 +1,9 @@
-#pragma once
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 
 #include <ostream>
 #include "node.h"
+#include "query.h"
 
 class LinkedList {
 private:
@@ -14,7 +16,7 @@ public:
 
 	// Destructor
 	~LinkedList();
-	
+
 	// Copy constructor
 	LinkedList(const LinkedList& other);
 
@@ -35,6 +37,10 @@ public:
 	// The functions below are written already. Do not modify them.
 	void print() const;
 	void print(std::ostream&) const;
+
+	bool query(Query& q);
 };
 
 ostream& operator<<(ostream& os, const LinkedList& ll);
+
+#endif

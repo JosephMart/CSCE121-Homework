@@ -75,6 +75,35 @@ void LinkedList::print(ostream& os) const {
 	os << *this;
 }
 
+bool LinkedList::query(Query& q) {
+	Node* pNode = head;
+	double temps = 0;
+	int count = 0;
+	if (q.avgMode == "AVG") {
+		while (pNode != nullptr) {
+			if (pNode->data.year >= q.year0 && pNode->data.year <= q.year1) {
+				temps += pNode->data.temperature;
+				count++;
+			}
+			pNode = pNode->next;
+		}
+		q.tempAvg = temps/count;
+		return true;
+	} else if (q.avgMode == "MODE") {
+		//calculate mode
+
+		while (pNode != nullptr) {
+			if (pNode->data.year >= q.year0 && pNode->data.year <= q.year1) {
+				temps += pNode->data.temperature;
+				count++;
+			}
+			pNode = pNode->next;
+		}
+		q.tempAvg = temps/count;
+		return true;
+	} else return false;
+}
+
 ostream& operator<<(ostream& os, const LinkedList& ll) {
 	Node* ptr = ll.head;
 	while (ptr != nullptr) {

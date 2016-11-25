@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NODE_H
+#define NODE_H
 
 // Include the header file for the data struct/class if you use one.
 // For example, if you have a Data class in Data.h, put
@@ -29,3 +30,5 @@ struct Node {
 };
 
 ostream& operator<<(ostream& os, const Node& n);
+
+#endif

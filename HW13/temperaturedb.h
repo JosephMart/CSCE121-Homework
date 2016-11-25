@@ -2,6 +2,7 @@
 #define TEMP_DB
 
 #include "linkedlist.h"
+#include "query.h"
 #include <string>
 
 class TemperatureDatabase {
@@ -26,7 +27,7 @@ private:
 	// You can add any private member variables/functions you feel useful in this class.
 	const int FIRST_YEAR = 1800;
 	const int CURRENT_YEAR = 2016;
-	
+
 	// Helper function to check if a record is valid
 	bool isValidEntry(const Data& d);
 	bool isValidYear(int year);

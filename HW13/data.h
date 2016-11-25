@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DATA_H
+#define DATA_H
 
 #include <iostream>
 using namespace std;
@@ -17,3 +18,5 @@ struct Data {
 
 istream& operator>>(istream& is, Data& d);
 ostream& operator<<(ostream& os, const Data& d);
+
+#endif
