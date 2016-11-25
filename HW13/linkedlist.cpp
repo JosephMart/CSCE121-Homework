@@ -79,9 +79,10 @@ bool LinkedList::query(Query& q) {
 	Node* pNode = head;
 	double temps = 0;
 	int count = 0;
+
 	if (q.avgMode == "AVG") {
 		while (pNode != nullptr) {
-			if (pNode->data.year >= q.year0 && pNode->data.year <= q.year1) {
+			if (pNode->data.location == q.location && pNode->data.year >= q.year0 && pNode->data.year <= q.year1) {
 				temps += pNode->data.temperature;
 				count++;
 			}

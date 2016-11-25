@@ -38,10 +38,11 @@ void TemperatureDatabase::performQuery(const string& filename) {
 	if(!fin) throw runtime_error("Failed to open file " + filename);
 	std::ofstream ofs ("results.dat", std::ofstream::out);
   	Query statment;
-
+	
   	while (fin >> statment) {
 		if (records.query(statment)) {
-			ofs << statment << endl;
+			// FIXME ofs << statment << endl;
+			cout << statment << endl;
 		}
   	}
 }
