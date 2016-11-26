@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <math.h>
 #include "linkedlist.h"
 using namespace std;
 
@@ -11,12 +12,23 @@ LinkedList::~LinkedList() {
 
 LinkedList::LinkedList(const LinkedList& source) {
 	// Implement this function and remove the following statment
-	throw runtime_error("This function is not implemented yet!");
+	//throw runtime_error("This function is not implemented yet!");
+	head = nullptr;
 }
 
 LinkedList& LinkedList::operator=(const LinkedList& source) {
-	// Implement this function and remove the following statment
-	throw runtime_error("This function is not implemented yet!");
+	// Implement this function
+	if (this != &source) { // Check for self-assignment, like: a = a;
+		this->clear();
+
+		// Allocate new memory & Copy data from source
+		const Node* temp = source.head;
+		while (temp) {
+			insert(temp->data.location, temp->data.year, temp->data.month, temp->data.temperature);
+			temp = temp->next;
+		}
+	}
+	return *this;
 }
 
 void LinkedList::insert(const Data& d) {
@@ -92,15 +104,35 @@ bool LinkedList::query(Query& q) {
 		return true;
 	} else if (q.avgMode == "MODE") {
 		//calculate mode
+		int max_count =1;
+    	int max_value = 1773;
 
-		while (pNode != nullptr) {
-			if (pNode->data.year >= q.year0 && pNode->data.year <= q.year1) {
-				temps += pNode->data.temperature;
-				count++;
+		while (pNode != nullptr && pNode->next != nullptr) {
+			bool test1 = ((pNode->data.location == q.location && pNode->data.year >= q.year0 && pNode->data.year <= q.year1));
+			bool test2 = (pNode->next->data.location == q.location && pNode->next->data.year >= q.year0 && pNode->next->data.year <= q.year1);
+
+			if (test1 && test2) {
+				// std::cout << pNode->data.temperature << '\n';
+				// std::cout << (pNode->next)->data.temperature << '\n';
+
+				// (condition) ? (if_true) : (if_false)
+				int currTemp = ((pNode->data.temperature) - floor((pNode->data.temperature)) <.6) ? floor((pNode->data.temperature)) : ceil(pNode->data.temperature);
+
+				int currTemp1 = ((pNode->next->data.temperature) - floor((pNode->next->data.temperature)) <.6) ? floor((pNode->next->data.temperature)) : ceil(pNode->next->data.temperature);
+
+				if(currTemp == currTemp1) {
+					count++;
+		            if(max_count<count) {
+		                max_count = count;
+		                max_value = currTemp;
+		            }
+		        } else {
+		            count = 1;//changing from count++. As per the steps mentioned above it should be reset to count = 1. Suggested by an anonymous user
+		        }
 			}
 			pNode = pNode->next;
 		}
-		q.tempAvg = temps/count;
+		q.tempAvg = max_value;
 		return true;
 	} else return false;
 }
