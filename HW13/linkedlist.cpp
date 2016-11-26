@@ -13,7 +13,13 @@ LinkedList::~LinkedList() {
 LinkedList::LinkedList(const LinkedList& source) {
 	// Implement this function and remove the following statment
 	//throw runtime_error("This function is not implemented yet!");
-	head = nullptr;
+	// head = source.head;
+	this->head = source.head;
+	const Node* temp = source.head;
+	while (temp != nullptr) {
+		this->insert(temp->data);
+		temp = temp->next;
+	}
 }
 
 LinkedList& LinkedList::operator=(const LinkedList& source) {
@@ -24,7 +30,7 @@ LinkedList& LinkedList::operator=(const LinkedList& source) {
 		// Allocate new memory & Copy data from source
 		const Node* temp = source.head;
 		while (temp) {
-			insert(temp->data.location, temp->data.year, temp->data.month, temp->data.temperature);
+			this->insert(temp->data);
 			temp = temp->next;
 		}
 	}
