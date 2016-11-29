@@ -15,7 +15,7 @@ LinkedList::LinkedList(const LinkedList& source) {
 	//throw runtime_error("This function is not implemented yet!");
 	// head = source.head;
 	this->head = source.head;
-	const Node* temp = source.head;
+	Node* temp = source.head;
 	while (temp != nullptr) {
 		this->insert(temp->data);
 		temp = temp->next;
@@ -114,7 +114,9 @@ bool LinkedList::query(Query& q) {
     	int max_value = 1773;
 
 		while (pNode != nullptr && pNode->next != nullptr) {
+
 			bool test1 = ((pNode->data.location == q.location && pNode->data.year >= q.year0 && pNode->data.year <= q.year1));
+
 			bool test2 = (pNode->next->data.location == q.location && pNode->next->data.year >= q.year0 && pNode->next->data.year <= q.year1);
 
 			if (test1 && test2) {
@@ -133,7 +135,7 @@ bool LinkedList::query(Query& q) {
 		                max_value = currTemp;
 		            }
 		        } else {
-		            count = 1;//changing from count++. As per the steps mentioned above it should be reset to count = 1. Suggested by an anonymous user
+		            count = 1;
 		        }
 			}
 			pNode = pNode->next;
