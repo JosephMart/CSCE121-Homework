@@ -44,8 +44,8 @@ void TemperatureDatabase::performQuery(const string& filename) {
 			ofs << statment << endl;
 			// cout << statment << endl;
 		} else {
-			 throw runtime_error("Failed to run query" );
-		 }
+			throw runtime_error("Failed to run query" );
+		}
   	}
 }
 

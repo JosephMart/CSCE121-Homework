@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdexcept>
 #include <math.h>
 #include "linkedlist.h"
 using namespace std;
@@ -11,12 +12,10 @@ LinkedList::~LinkedList() {
 }
 
 LinkedList::LinkedList(const LinkedList& source) {
-	// Implement this function and remove the following statment
-	//throw runtime_error("This function is not implemented yet!");
-	// head = source.head;
-	this->head = source.head;
+	this->head = nullptr;
+	this->tail = nullptr;
 	Node* temp = source.head;
-	while (temp != nullptr) {
+	while (temp) {
 		this->insert(temp->data);
 		temp = temp->next;
 	}
@@ -98,6 +97,11 @@ bool LinkedList::query(Query& q) {
 	double temps = 0;
 	int count = 0;
 
+	if (q.year0 < 1800 || q.year0 > 2016 || q.year1 < 1800 || q.year1 > 2016 || q.location == 0 || q.avgMode == "") {
+		return false;
+	}
+
+
 	if (q.avgMode == "AVG") {
 		while (pNode != nullptr) {
 			if (pNode->data.location == q.location && pNode->data.year >= q.year0 && pNode->data.year <= q.year1) {
@@ -120,13 +124,10 @@ bool LinkedList::query(Query& q) {
 			bool test2 = (pNode->next->data.location == q.location && pNode->next->data.year >= q.year0 && pNode->next->data.year <= q.year1);
 
 			if (test1 && test2) {
-				// std::cout << pNode->data.temperature << '\n';
-				// std::cout << (pNode->next)->data.temperature << '\n';
 
-				// (condition) ? (if_true) : (if_false)
-				int currTemp = ((pNode->data.temperature) - floor((pNode->data.temperature)) <.6) ? floor((pNode->data.temperature)) : ceil(pNode->data.temperature);
+				int currTemp = ((pNode->data.temperature) - floor((pNode->data.temperature)) <.5) ? floor((pNode->data.temperature)) : ceil(pNode->data.temperature);
 
-				int currTemp1 = ((pNode->next->data.temperature) - floor((pNode->next->data.temperature)) <.6) ? floor((pNode->next->data.temperature)) : ceil(pNode->next->data.temperature);
+				int currTemp1 = ((pNode->next->data.temperature) - floor((pNode->next->data.temperature)) <.5) ? floor((pNode->next->data.temperature)) : ceil(pNode->next->data.temperature);
 
 				if(currTemp == currTemp1) {
 					count++;
