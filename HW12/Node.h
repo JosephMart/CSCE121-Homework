@@ -1,7 +1,6 @@
 #ifndef NODE
 #define NODE
 #include <iostream>
-#include "Data.h"
 using namespace std;
 
 // Include the header file for the data struct/class if you use one.

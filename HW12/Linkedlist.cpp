@@ -39,7 +39,39 @@ void LinkedList::insert(int location, int year, int month, double temperature) {
 	Node* n = new Node(location, year, month, temperature);
 	n->next = head;
 	head = n;
+
 }
+
+// Node* LinkedList::sort(Node* head) {
+// 	Node* curr;
+// 	Node* prev;
+// 	curr = head;
+
+// 	while( curr->next != NULL){
+// 		if(curr == head){
+//              head = curr->next;
+//              curr->next = head->next;
+//              head->next = curr;
+//              prev = head;
+//          }
+//      	if(curr->Year > curr->next->Year){
+//                   head = curr->next;
+//                   curr->next = head->next;
+//                   head->next = curr;
+//                   prev = head;
+//         } else if(curr -> next -> next != NULL){
+
+//                   prev->next = curr->next;
+//                   curr->next = prev->next->next;
+//                   prev->next->next = curr;
+
+//         }else if(head != curr){
+//             prev = prev->next;
+//         }else{}
+// 		 curr = curr->next;
+//     }
+//  	return head;
+// }
 
 void LinkedList::clear() {
 	// Implement this function
@@ -69,11 +101,10 @@ ostream& operator<<(ostream& os, const LinkedList& ll) {
 		os << " <Empty List>";
 	}
 	while (current != nullptr) {
-		// if (current != ll.head) {
-			os << "Location: " << current->Location << endl;
-			os << "Year: " << current->Year << endl;
-			os << "Month: " << current->Month << endl;
-			os << "Temperature: " << current->tempValue << endl;
+			os << current->Location;
+			os << " " << current->Year;
+			os << " " << current->Month;
+			os << " " << current->tempValue;
 			os << endl;
 			current = current->next;
 		// }

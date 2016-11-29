@@ -39,6 +39,7 @@ void TemperatureDatabase::loadData(const string& filename) {
     	}
 		//cout << records << endl;
     	myfile.close();
+		cout << records << endl;
   	} else
 	   cout << "Unable to open file";
 }
