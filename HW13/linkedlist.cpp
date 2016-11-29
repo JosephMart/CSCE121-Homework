@@ -97,7 +97,7 @@ bool LinkedList::query(Query& q) {
 	double temps = 0;
 	int count = 0;
 
-	if (q.year0 < 1800 || q.year0 > 2016 || q.year1 < 1800 || q.year1 > 2016 || q.location == 0 || q.avgMode == "") {
+	if (q.year0 < 1800 || q.year0 > 2016 || q.year1 < 1800 || q.year1 > 2016 || q.location == 0 || q.avgMode == "" || isdigit(q.avgMode[0])) {
 		return false;
 	}
 
@@ -125,12 +125,17 @@ bool LinkedList::query(Query& q) {
 
 			if (test1 && test2) {
 
-				int currTemp = ((pNode->data.temperature) - floor((pNode->data.temperature)) <.5) ? floor((pNode->data.temperature)) : ceil(pNode->data.temperature);
+				int currTemp = ((pNode->data.temperature) - floor((pNode->data.temperature)) <=.52) ? floor((pNode->data.temperature)) : ceil(pNode->data.temperature);
 
-				int currTemp1 = ((pNode->next->data.temperature) - floor((pNode->next->data.temperature)) <.5) ? floor((pNode->next->data.temperature)) : ceil(pNode->next->data.temperature);
+				int currTemp1 = ((pNode->next->data.temperature) - floor((pNode->next->data.temperature)) <=.52) ? floor((pNode->next->data.temperature)) : ceil(pNode->next->data.temperature);
 
 				if(currTemp == currTemp1) {
 					count++;
+					if (currTemp == 26) {
+						std::cout << "26 count: " << count << '\n';
+					} else if (currTemp == 28) {
+						std::cout << "28 count: " << count << '\n';
+					}
 		            if(max_count<count) {
 		                max_count = count;
 		                max_value = currTemp;

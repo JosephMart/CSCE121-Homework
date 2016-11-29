@@ -1,4 +1,5 @@
 #include "data.h"
+#include <stdexcept>
 
 Data::Data() {}
 
@@ -40,6 +41,9 @@ Query::Query(int location, string avgMode, int year0, int year1)
 
 istream& operator>>(istream& is, Query& q) {
 	is >> q.location >> q.avgMode >> q.year0 >> q.year1;
+	if (q.year0 < 1800 || q.year0 > 2016 || q.year1 < 1800 || q.year1 > 2016 || q.location == 0 || q.avgMode == "" || isdigit(q.avgMode[0])) {
+		throw runtime_error("Failed to run query" );
+	}
 	return is;
 }
 

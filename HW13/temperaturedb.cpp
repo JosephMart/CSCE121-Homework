@@ -1,5 +1,4 @@
 #include "temperaturedb.h"
-
 #include <fstream>
 #include <stdexcept>
 #include <math.h>
@@ -42,7 +41,6 @@ void TemperatureDatabase::performQuery(const string& filename) {
   	while (fin >> statment) {
 		if (records.query(statment)) {
 			ofs << statment << endl;
-			// cout << statment << endl;
 		} else {
 			throw runtime_error("Failed to run query" );
 		}
