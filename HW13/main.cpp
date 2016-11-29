@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #include "temperaturedb.h"
-=======
-#include "Temperaturedb.h"
->>>>>>> master
 
 #include <iostream>
 using namespace std;
@@ -15,7 +11,5 @@ int main(int argc, char** argv) {
 		TemperatureDatabase database;
 		database.loadData(argv[1]);
 		database.performQuery(argv[2]);
-		
 	}
-	
 }
