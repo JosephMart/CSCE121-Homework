@@ -84,14 +84,20 @@ void Viewer::navPressed(Fl_Widget* widget) {
 		}
 	}
 
+	imageBox->deimage();
 	nextPic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(nPic), true).c_str());
 	prevPic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(pPic), true).c_str());
 	pic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(currentIndex)).c_str());
 
+
+	imageBox->color(FL_WHITE);
+	imageBox->redraw();
 	prev->image(prevPic);
 	next->image(nextPic);
 	imageBox->image(pic);
 	prev->redraw();
 	next->redraw();
+
 	imageBox->redraw();
+	this->redraw();
 }
