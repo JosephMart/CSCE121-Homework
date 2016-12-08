@@ -21,3 +21,29 @@ void NavButton::setImage(string filename) {
 }
 
 int NavButton::totalClicks = 0;
+
+
+// FL_KEYUP and FL_RELEASE handle evetn switch Event
+// flwidgethandle(event)
+int NavButton::handle(int event){
+
+     switch(event) {
+
+    	case FL_RELEASE:
+			clickCount++;
+			totalClicks++;
+			std::cout << "The " << label << " button has been pressed " << clickCount << " times." << '\n';
+			std::cout << "All buttons have been pressed " << totalClicks <<" times" << '\n' << '\n';
+			this->do_callback();
+
+
+      		return 1;
+
+
+		// case FL_event_key()
+		// 	std::cout << "HERE I AM" << '\n';
+    	default:
+      		return Fl_Widget::handle(event);
+  	}
+
+}

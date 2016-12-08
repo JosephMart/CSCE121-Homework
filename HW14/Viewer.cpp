@@ -5,7 +5,6 @@
 using namespace std;
 
 void buttonCallback(Fl_Widget* widget, void* viewerPtr) {
-	// cout << "Callback called" << endl;
 	Viewer* viewer = static_cast<Viewer*>(viewerPtr);
 	viewer->navPressed(widget);
 	/* you can name this whatever you want, the idea is to call a
@@ -82,14 +81,9 @@ void Viewer::navPressed(Fl_Widget* widget) {
 			pPic = currentIndex - 1;
 			nPic = currentIndex + 1;
 		}
-
 	}
 
-	button->addClick();
-	std::cout << button->getLabel() << " has been pressed " << button->getClicks() << " times." << '\n';
-	std::cout << "All buttons have been pressed " << button->getTot() << '\n' << '\n';
 
-	imageBox->deimage();
 	nextPic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(nPic), true).c_str());
 	prevPic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(pPic), true).c_str());
 	pic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(currentIndex)).c_str());
