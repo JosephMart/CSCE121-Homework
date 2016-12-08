@@ -22,6 +22,8 @@ public:
 	std::string getLabel() const;
 	void setImage(std::string);
 
+	void pressed();
+
 	int handle(int event);
 };
 

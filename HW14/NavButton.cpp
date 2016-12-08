@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "NavButton.h"
 #include "Viewer.h"
 using namespace std;
@@ -23,27 +24,39 @@ void NavButton::setImage(string filename) {
 int NavButton::totalClicks = 0;
 
 
-// FL_KEYUP and FL_RELEASE handle evetn switch Event
-// flwidgethandle(event)
 int NavButton::handle(int event){
 
      switch(event) {
 
     	case FL_RELEASE:
-			clickCount++;
-			totalClicks++;
-			std::cout << "The " << label << " button has been pressed " << clickCount << " times." << '\n';
-			std::cout << "All buttons have been pressed " << totalClicks <<" times" << '\n' << '\n';
+			pressed();
 			this->do_callback();
-
-
       		return 1;
 
-
-		// case FL_event_key()
-		// 	std::cout << "HERE I AM" << '\n';
+		case FL_KEYUP:
+			// cout << Fl::event_key() << '\n';
+			if (Fl::event_key() == 65363 || Fl::event_key() == 110 || Fl::event_key() == 65289 ) {
+				if (label == "Next Button") {
+					pressed();
+					this->do_callback();
+					return 1;
+				}
+			} else if(Fl::event_key() == 65361 || Fl::event_key() == 112 || Fl::event_key() == 65288) {
+				if (label == "Previous Button") {
+					pressed();
+					this->do_callback();
+					return 1;
+				}
+			}
     	default:
       		return Fl_Widget::handle(event);
   	}
 
+}
+
+void NavButton::pressed(){
+	clickCount++;
+	totalClicks++;
+	std::cout << "The " << label << " button has been pressed " << clickCount << " times." << '\n';
+	std::cout << "All buttons have been pressed " << totalClicks <<" times" << '\n' << '\n';
 }

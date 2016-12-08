@@ -83,7 +83,7 @@ void Viewer::navPressed(Fl_Widget* widget) {
 		}
 	}
 
-
+	std::cout << currentIndex << '\n';
 	nextPic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(nPic), true).c_str());
 	prevPic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(pPic), true).c_str());
 	pic = new Fl_JPEG_Image(getPathFilename(imageFilenames.at(currentIndex)).c_str());
