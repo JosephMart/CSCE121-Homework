@@ -20,6 +20,4 @@ HW instructions are from [here](http://courses.cse.tamu.edu/jmichael/f16/121/hom
 | [HW13: Temperature Queries (Part 2)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/13/)  |   96/60   |
 | [HW14: Image Viewer](http://courses.cse.tamu.edu/jmichael/f16/121/homework/14/)                  |  100/100  |
 
-<sup>*Still needs manual grading</sup>
-
 <sup>Made with :heart: by Joseph Martinsen </sup>
