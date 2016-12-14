@@ -17,8 +17,8 @@ HW instructions are from [here](http://courses.cse.tamu.edu/jmichael/f16/121/hom
 | [HW10: Store Backend (Part 2)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/10/)        |  100/100  |
 | [HW11: Store Backend (Part 3)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/11/)        |  100/100  |
 | [HW12: Temperature Queries (Part 1)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/12/)  | 86.25/100 |
-| [HW13: Temperature Queries (Part 2)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/13/)  |   56/60   |
-| [HW14: Image Viewer](http://courses.cse.tamu.edu/jmichael/f16/121/homework/14/)                  |    N/A    |
+| [HW13: Temperature Queries (Part 2)](http://courses.cse.tamu.edu/jmichael/f16/121/homework/13/)  |   96/60   |
+| [HW14: Image Viewer](http://courses.cse.tamu.edu/jmichael/f16/121/homework/14/)                  |  100/100  |
 
 <sup>*Still needs manual grading</sup>
 
